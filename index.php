@@ -9,11 +9,11 @@
     <title>Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <?php include('scripts.php'); ?>
-<?php include('ing_datos.php'); ?>
 <nav><div class="container"><a>SuperTest</a></div></nav>
 <div class="row container">
     <div class="col l3">
@@ -41,8 +41,8 @@
                 </thead>
                 <tbody>
                 <?php
-                $con1 = mysqli_query($conexion, "SELECT * FROM personal");
-                while($row = mysqli_fetch_array($con1)){
+                $consulta = mysqli_query($conexion, "SELECT * FROM personal");
+                while($row = mysqli_fetch_array($consulta)){
                     echo 
                     '<tr>
                     <td>'.$row['id'].'</td>
@@ -53,6 +53,7 @@
                     <td>'. $row['puesto'].'</td>
                     <td>'. $row['sx'].'</td>
                     <td>'. $row['Fena'].'</td>
+                    <td><a class="btn-floating btn-small red" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
                     </tr>';        
                 }
 
@@ -69,12 +70,13 @@
                       <th>ciudad</th>
                       <th>cp</th>
                       <th>tel</th>
+                      <th></th>
                   </tr>
                 </thead>
                 <tbody>
                 <?php
-                    $con2 = mysqli_query($conexion, "SELECT * FROM sucursal");
-                    while($row = mysqli_fetch_array($con2)){
+                    $consulta = mysqli_query($conexion, "SELECT * FROM sucursal");
+                    while($row = mysqli_fetch_array($consulta)){
                         echo 
                         '<tr>
                         <td>'.$row['id'].'</td>
@@ -83,6 +85,7 @@
                         <td>'. $row['ciudad'].'</td>
                         <td>'. $row['cp'].'</td>
                         <td>'. $row['tel'].'</td>
+                        <td><a class="btn-floating btn-small red" onclick="b_sucursal()" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
                         </tr>';        
                     }
                 ?>
@@ -139,8 +142,8 @@
                 <form class="col s12" method="post" action="index.php">
                   <div class="row">
                     <div class="input-field col s2">
-                      <input id="codigosuc" name="codigosuc" type="number" class="validate">
-                      <label for="codigosuc">codigosuc</label>
+                      <input id="codigosuc2" name="codigosuc" type="number" class="validate">
+                      <label for="codigosuc2">codigosuc</label>
                     </div>
                     <div class="input-field col s5">
                       <input id="domicilio" name="domicilio" type="text" class="validate">
@@ -157,7 +160,7 @@
                       <label for="cp">cp</label>
                     </div>
                     <div class="input-field col s9">
-                      <input id="tel" name="tel" type="text" class="validate">
+                      <input type="tel" id="tel" name="tel" pattern="\[0-9]{3}\[0-9]{3}[0-9]{4}" title="Utiliza un formato valido 0123456789" class="validate">
                       <label for="tel">tel</label>
                     </div>
                   </div>
