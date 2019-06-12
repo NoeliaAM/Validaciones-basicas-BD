@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    require ("conexion.php");
+include('conexion.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 </head>
 <body>
 <?php include('scripts.php'); ?>
@@ -170,5 +171,6 @@
         </div>
     </div>
 </div>
+    <script href="scripts.js"></script>
 </body>
 </html>

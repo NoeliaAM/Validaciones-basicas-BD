@@ -1,4 +1,5 @@
 <script>
+
     function show_tables(){
         document.getElementById('tables').style.display = 'block';
         document.getElementById('forms').style.display = 'none';
@@ -13,8 +14,6 @@
             $consulta="DELETE FROM personal WHERE id= ".$id_personal;
             mysqli_query($conexion,$consulta);           
         ?>
-        swal("Dato eliminado", "El dato ah sido eliminado de la tabla personal", "success");
-        
     }
     function eliminar_s(){
         <?php
@@ -22,7 +21,6 @@
             $consulta="SELECT * FROM personal WHERE codigosuc = '$id_sucursal'";
             $result = mysqli_query($conexion, $consulta);
             $encontrar = mysqli_num_rows($result); 
-            echo Console::log('', $encontrar);
             if($encontrar>=1){
                 
             }else{
@@ -32,7 +30,6 @@
         ?>
     }
 </script>
-
 <?php
     if(isset($_POST['ingresar_personal'])){
         if($_POST['codigosuc'] != "" && $_POST['nom'] != "" && $_POST['apellidos'] != "" && $_POST['email'] != "" && $_POST['puesto'] != "" && $_POST['sx'] != "" && $_POST['Fena'] != ""){
