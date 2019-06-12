@@ -19,8 +19,8 @@
     <div class="col l3">
         <br>
         <div class="collection">
-            <a href="#!" onclick="show_tables();" class="collection-item">Tablas</a>
-            <a href="#!" onclick="show_forms();" class="collection-item">Agregar datos</a>
+            <a onclick="show_tables();" class="collection-item">Tablas</a>
+            <a onclick="show_forms();" class="collection-item">Agregar datos</a>
         </div>
     </div>
     <div class="col l9">
@@ -53,7 +53,7 @@
                     <td>'. $row['puesto'].'</td>
                     <td>'. $row['sx'].'</td>
                     <td>'. $row['Fena'].'</td>
-                    <td><a class="btn-floating btn-small red" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
+                    <td><a class="btn-floating btn-small red" onclick="eliminar_p();" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
                     </tr>';        
                 }
 
@@ -85,7 +85,7 @@
                         <td>'. $row['ciudad'].'</td>
                         <td>'. $row['cp'].'</td>
                         <td>'. $row['tel'].'</td>
-                        <td><a class="btn-floating btn-small red" onclick="b_sucursal()" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
+                        <td><a class="btn-floating btn-small red" onclick="eliminar_s()" href="index.php?id='.$row['id'].'"><i class="material-icons">clear</i></a></td>
                         </tr>';        
                     }
                 ?>

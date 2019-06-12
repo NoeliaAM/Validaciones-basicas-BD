@@ -1,7 +1,4 @@
 <script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
     function show_tables(){
         document.getElementById('tables').style.display = 'block';
         document.getElementById('forms').style.display = 'none';
@@ -9,6 +6,30 @@
     function show_forms(){
         document.getElementById('tables').style.display = 'none';
         document.getElementById('forms').style.display = 'block';
+    }
+    function eliminar_p(){
+        <?php
+            $id_personal = $_GET['id'];    
+            $consulta="DELETE FROM personal WHERE id= ".$id_personal;
+            mysqli_query($conexion,$consulta);           
+        ?>
+        swal("Dato eliminado", "El dato ah sido eliminado de la tabla personal", "success");
+        
+    }
+    function eliminar_s(){
+        <?php
+            $id_sucursal = $_GET['id'];
+            $consulta="SELECT * FROM personal WHERE codigosuc = '$id_sucursal'";
+            $result = mysqli_query($conexion, $consulta);
+            $encontrar = mysqli_num_rows($result); 
+            echo Console::log('', $encontrar);
+            if($encontrar>=1){
+                
+            }else{
+                $consulta2="DELETE FROM sucursal WHERE id= ".$id_sucursal;
+                mysqli_query($conexion,$consulta2);    
+            }
+        ?>
     }
 </script>
 
@@ -24,23 +45,28 @@
             $sx=$_POST['sx'];
             $Fena=$_POST['Fena'];
             
-            $consulta = "SELECT * FROM personal WHERE email = '$email'";
+            $consulta = "SELECT * FROM sucursal WHERE codigosuc = '$codigosuc'";
 			$result = mysqli_query($conexion, $consulta);
 			$encontrar = mysqli_num_rows($result);
-
-			if($encontrar == 1) { echo '<script>swal("e-mail no valido", "e-mail ya registrado", "error");</script>'; 
+            
+            if($encontrar==0){
+                echo '<script>swal("codigosuc no valido", "El codigosuc ingresado no es valido", "error");</script>';
             }else{
-			$datos = "INSERT INTO personal (id,codigosuc,nom,apellidos,email,puesto,sx,Fena)VALUES('', '$codigosuc','$nom','$apellidos','$email','$puesto','$sx','$Fena')";
+                $consulta = "SELECT * FROM personal WHERE email = '$email'";
+                $result = mysqli_query($conexion, $consulta);
+                $encontrar = mysqli_num_rows($result);
 
-			$result = mysqli_query($conexion, $datos);	
-			echo '<script>swal("Datos agregados", "Los datos se han ingresado con exito", "success");</script>';
-			}
+                if($encontrar == 1) { 
+                    echo '<script>swal("e-mail no valido", "e-mail ya registrado", "error");</script>'; 
+                }else{
+                    $datos = "INSERT INTO personal (id,codigosuc,nom,apellidos,email,puesto,sx,Fena)VALUES('', '$codigosuc','$nom','$apellidos','$email','$puesto','$sx','$Fena')";
+                    $result = mysqli_query($conexion, $datos);	
+                    header('location: index.php');
+                    echo '<script>swal("Datos agregados", "Los datos se han ingresado con exito", "success");</script>';
+                }   
+            }
         }else{   echo '<script>swal("Campos vacios", "Por favor llena todos los datos", "error");</script>'; }
     }
-    if(isset($_POST['borrar_personal'])){
-        $consulta = "SELECT * FROM sucursal WHERE codigosuc = '$codigosuc'";
-    }
-
     if(isset($_POST['ingresar_sucursal'])){
         if($_POST['codigosuc'] != "" && $_POST['domicilio'] != "" && $_POST['ciudad'] != "" && $_POST['cp'] != "" && $_POST['tel'] != ""){
             
@@ -63,13 +89,4 @@
 			}
         }else{   echo '<script>swal("Campos vacios", "Por favor llena todos los datos", "error");</script>'; }
     }
-    
-    $id_personal = $_GET['id'];
-    $id_sucursal = $_GET['id'];
-    
-    $consulta1="DELETE FROM personal WHERE id= ".$id_personal;
-    $consulta2="DELETE FROM sucursal WHERE id= ".$id_sucursal;
-    mysqli_query($conexion,$consulta1) or die(mysqli_error());
-    mysqli_query($conexion,$consulta2) or die('<script>swal("Operacion no permitida", "El codigosuc esta siendo ultizado no puedes borrar esta sucursal", "error");
-    </script>');
 ?>

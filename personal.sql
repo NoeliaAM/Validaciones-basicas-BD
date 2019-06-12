@@ -1,3 +1,14 @@
+DROP TABLE IF EXISTS sucursal;
+create table sucursal(
+    id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    codigosuc INT(10) NOT NULL UNIQUE,
+    domicilio VARCHAR(50) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL,
+    cp VARCHAR(50) NOT NULL,
+    tel VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+)engine=innodb;
 DROP TABLE IF EXISTS personal; 
 create table personal(
 	id int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT, 	
@@ -12,43 +23,20 @@ create table personal(
 	update_at timestamp,
 	INDEX idsuc_x (codigosuc),
 	FOREIGN KEY (codigosuc) references sucursal(codigosuc)ON DELETE RESTRICT
-) ENGINE=ndbcluster;
-DROP TABLE IF EXISTS sucursal;
-create table sucursal(
-id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-codigosuc INT(10) NOT NULL UNIQUE,
-domicilio VARCHAR(50) NOT NULL,
-ciudad VARCHAR(50) NOT NULL,
-cp VARCHAR(50) NOT NULL,
-tel VARCHAR(50) NOT NULL,
-created_at TIMESTAMP NOT NULL,
-updated_at TIMESTAMP NOT NULL
-)engine=ndbcluster;
+) ENGINE=innodb;
 
-CREATE TABLE USER (
-     user_id INT, 
-     user_name VARCHAR(50), 
-     company_id INT,
-     INDEX company_id_idx (company_id),
-     FOREIGN KEY (company_id) REFERENCES COMPANY (company_id) ON DELETE RESTRICT
-) ENGINE=ndbcluster;
+insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(1,"Arboledas 45","Encenada","19008","3128274847");
+insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(2,"Tabachin 86","Colima","28869","3145869423");
+insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(3,"Almendros 96","Tijuana","14569","7415258963");
+insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(4,"Elias Zamora 41","CDMX","84621","7896541230");
+insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(5,"Valle 66","Jalisco","19000","3128572369");
 
-CREATE TABLE COMPANY (
-     company_id INT NOT NULL,
-     company_name VARCHAR(50),
-     PRIMARY KEY (company_id)
-) ENGINE=ndbcluster;
-
-INSERT INTO user(user_id, user_name, company_id) VALUES(2, "Noelia",2);
-
-INSERT INTO company(company_id, company_name) VALUES(2, "super");
-
-
-insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(1,"Carlitos","Encenada","19008","31227847");
-
-insert into sucursal(codigosuc,domicilio,ciudad,CP,tel) values(2,"Carlitos","Encenada","19008","31227847");
-
-INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(20, "Brian", "Barajas", "brian@ucol.mx", "Gerente", "M", "1998-02-26");
-
-INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(2, "Noelia", "Barajas", "briannn@ucol.mx", "Gerente", "M", "1998-02-26");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(2, "Brian", "Barajas", "a@ucol.mx", "Gerente", "M", "1998-02-26");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(2, "Noelia", "Mendez", "b@ucol.mx", "Gerente", "F", "1998-09-22");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(1, "Daniel", "Diaz", "c@ucol.mx", "Administrador", "M", "1998-10-20");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(4, "Josue", "Martinez", "d@ucol.mx", "Administrador", "M", "1998-08-21");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(5, "Carlos", "Lezama", "e@ucol.mx", "Gerente", "M", "1998-01-30");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(2, "Rodrigo", "Rodriguez", "f@ucol.mx", "Mostrador", "M", "1998-05-06");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(4, "Maria", "Gonzales", "g@ucol.mx", "Gerente", "F", "1998-08-06");
+INSERT INTO personal(codigosuc, nom, apellidos, email, puesto, sx, Fena) VALUES(5, "Kenia", "Barajas", "h@ucol.mx", "Gerente", "F", "1998-02-02");
 
